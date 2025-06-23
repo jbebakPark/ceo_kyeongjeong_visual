@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>법인 CEO 정기보험 - 긴급 제안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        
+        .phone-container {
+            width: 390px;
+            max-height: 720px;
+            background: #000;
+            border-radius: 25px;
+            padding: 3px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+        
+        .screen {
+            width: 100%;
+            height: 714px;
+            background: #fff;
+            border-radius: 22px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .kakao-header {
+            background: linear-gradient(135deg, #FFE066 0%, #FFCD00 100%);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #2d3748;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+        
+        .message-container {
+            background: white;
+            margin: 15px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        /* 긴급 배너 */
+        .urgent-banner {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        /* 헤더 섹션 */
+        .header-section {
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .main-title {
+            font-size: 22px;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+        
+        .sub-title {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        /* 컨텐츠 섹션 */
+        .content-section {
+            padding: 25px 20px;
+        }
+        
+        /* 혜택 카드들 */
+        .benefits-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .benefit-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .benefit-content {
+            flex: 1;
+        }
+        
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0c4a6e;
+            margin-bottom: 4px;
+        }
+        
+        .benefit-desc {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+        
+        /* 프로세스 다이어그램 */
+        .process-section {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .process-title {
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+        
+        .process-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .process-step {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .step-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        
+        .step-circle.step1 { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .step-circle.step2 { background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%); }
+        .step-circle.step3 { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        
+        .step-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #475569;
+        }
+        
+        .arrow-icon {
+            font-size: 16px;
+            color: #94a3b8;
+            margin: 0 5px;
+        }
+        
+        /* 긴급성 박스 */
+        .urgency-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 2px solid #ef4444;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .urgency-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #dc2626;
+            margin-bottom: 8px;
+        }
+        
+        .urgency-text {
+            font-size: 15px;
+            font-weight: 700;
+            color: #991b1b;
+            line-height: 1.4;
+        }
+        
+        .date-highlight {
+            color: #1d4ed8;
+            font-size: 17px;
+            font-weight: 900;
+        }
+        
+        /* CTA 버튼들 */
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .cta-btn {
+            display: block;
+            text-decoration: none;
+            padding: 16px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        /* 회사 정보 푸터 */
+        .company-footer {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .company-logo {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+            color: #1e40af;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(30, 64, 175, 0.1);
+        }
+        
+        .logo-line {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            margin: 0 auto 8px;
+            border-radius: 2px;
+        }
+        
+        .logo-subtitle {
+            font-size: 14px;
+            color: #475569;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+        
+        .contact-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+        
+        .contact-phone {
+            font-size: 18px;
+            font-weight: 800;
+            color: #dc2626;
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <div class="screen">
+            <div class="kakao-header">
+                <div class="profile-img">👑</div>
+                <span>CEO 전용 보험 솔루션</span>
+            </div>
+            
+            <div class="content-area">
+                <div class="message-container">
+                    <!-- 긴급 배너 -->
+                    <div class="urgent-banner">
+                        ⚠️ 6월 30일 판매 종료 ⚠️
+                    </div>
+                    
+                    <!-- 헤더 -->
+                    <div class="header-section">
+                        <div class="main-title">법인 CEO 경영인<br>정기보험</div>
+                        <div class="sub-title">세무 최적화 & 리스크 관리 솔루션</div>
+                    </div>
+                    
+                    <!-- 메인 컨텐츠 -->
+                    <div class="content-section">
+                        <!-- 핵심 혜택 -->
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">🛡️</div>
+                                <div class="benefit-content">
+                                    <div class="benefit-title">세무 리스크 완화</div>
+                                    <div class="benefit-desc">과세이연 혜택으로 법인 세무부담 최소화</div>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-card">
+                                <div class="benefit-icon">💰</div>
+                                <div class="benefit-content">
+                                    <div class="benefit-title">이중 절세 효과</div>
+                                    <div class="benefit-desc">법인과 개인 세부담 동시 절감</div>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-card">
+                                <div class="benefit-icon">📈</div>
+                                <div class="benefit-content">
+                                    <div class="benefit-title">현금흐름 개선</div>
+                                    <div class="benefit-desc">유동성 확보 및 운영자금 최적화</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 프로세스 다이어그램 -->
+                        <div class="process-section">
+                            <div class="process-title">💡 세무최적화 프로세스</div>
+                            <div class="process-flow">
+                                <div class="process-step">
+                                    <div class="step-circle step1">💼<br>퇴직금<br>준비</div>
+                                    <div class="step-label">기존방식</div>
+                                </div>
+                                <div class="arrow-icon">→</div>
+                                <div class="process-step">
+                                    <div class="step-circle step2">🛡️<br>CEO<br>정기보험</div>
+                                    <div class="step-label">최적화</div>
+                                </div>
+                                <div class="arrow-icon">→</div>
+                                <div class="process-step">
+                                    <div class="step-circle step3">💰<br>운영자금<br>확보</div>
+                                    <div class="step-label">결과</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 긴급성 강조 -->
+                        <div class="urgency-box">
+                            <div class="urgency-title">🔥 긴급 알림 🔥</div>
+                            <div class="urgency-text">
+                                <span class="date-highlight">6월 30일</span> 이후<br>
+                                더 이상 가입 불가!<br>
+                                <strong>지금 바로 검토 필수</strong>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA 버튼 -->
+                        <div class="cta-buttons">
+                            <a href="https://myip.kr/oWWCz" class="cta-btn btn-primary" target="_blank">
+                                📊 상세 제안서 & 전문가 상담
+                            </a>
+                            <a href="https://open.kakao.com/o/s15lHyCh" class="cta-btn btn-secondary" target="_blank">
+                                💬 즉시 상담 신청하기
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 회사 정보 -->
+                    <div class="company-footer">
+                        <div class="company-logo">
+                            <div class="logo-text">Samsung</div>
+                            <div class="logo-line"></div>
+                            <div class="logo-subtitle">Financial Networks</div>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-name">박재박 팀장</div>
+                            <div class="contact-phone">📞 010-5137-2327</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
